@@ -722,7 +722,6 @@ function updateCurvedStripGeometry(mesh) {
   }
 
   geometry.attributes.position.needsUpdate = true;
-  geometry.computeVertexNormals();
 }
 
 function createCurveLineGeometry(offset, width, startZ, length, yOffset) {
@@ -788,7 +787,6 @@ function updateCurveLineGeometry(mesh) {
   }
 
   geometry.attributes.position.needsUpdate = true;
-  geometry.computeVertexNormals();
 }
 
 
