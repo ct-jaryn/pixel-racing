@@ -2062,10 +2062,13 @@ function update(dt) {
   const speedMultiplier = speed > 250 ? 2.0 : speed > 180 ? 1.5 : 1.0;
   score += speed * dt * 0.1 * speedMultiplier;
   distance += speed * dt;
+  difficulty = 1 + score / 2000;
 
+  const speedRatio = speed / effectiveMax;
+  const bumpBase = performance.now() * 0.025;
+  const bumpStrength = speedRatio * (nitroActive ? 0.15 : 0.08);
   const bumpNoise = Math.sin(bumpBase * 3.7) * 0.3 + Math.sin(bumpBase * 7.1) * 0.15;
   const bumpStrengthFinal = bumpStrength + bumpNoise * speedRatio * 0.06;
-  difficulty = 1 + score / 2000;
 
   updateRoadScroll(dt);
   recycleObject(trees, dt);
@@ -2088,9 +2091,6 @@ function update(dt) {
   checkPowerupCollection();
   checkNearMisses(dt);
 
-  const speedRatio = speed / effectiveMax;
-  const bumpBase = performance.now() * 0.025;
-  const bumpStrength = speedRatio * (nitroActive ? 0.15 : 0.08);
   const bumpX = Math.sin(bumpBase * 1.7) * bumpStrengthFinal;
   const bumpY = Math.sin(bumpBase * 2.3) * bumpStrengthFinal * 0.6;
 
